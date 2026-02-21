@@ -25,6 +25,52 @@
             padding: 0;
             display: flex;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #adminContent {
+            display: none;
+            width: 100%;
+        }
+
+        /* Login Section */
+        #loginSection {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .login-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 50px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-card h2 {
+            font-family: 'Outfit';
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            letter-spacing: -1px;
+            text-transform: uppercase;
+        }
+
+        .login-error {
+            color: var(--red);
+            font-size: 0.7rem;
+            font-weight: 800;
+            margin-top: 15px;
+            display: none;
+            text-transform: uppercase;
         }
 
         /* Sidebar */
@@ -294,92 +340,117 @@
             color: #fff;
         }
 
-        .icon-btn.red:hover {
+        .icon-btn.red {
             color: var(--red);
             border-color: var(--red);
+        }
+
+        .icon-btn.red:hover {
+            background: var(--red);
+            color: #fff;
         }
     </style>
 </head>
 
 <body>
-    <div class="sidebar">
-        <h2 style="font-family:'Outfit'; margin-bottom: 30px; letter-spacing:-1px;">L7K SYSTEM</h2>
-        <button class="nav-btn active" onclick="showSection('orders')">
-            <i data-lucide="shopping-cart"></i> Commandes
-        </button>
-        <button class="nav-btn" onclick="showSection('inventory')">
-            <i data-lucide="package"></i> Inventaire
-        </button>
-        <button class="nav-btn" onclick="showSection('add-product')">
-            <i data-lucide="plus-circle"></i> Ajouter Produit
-        </button>
+    <div id="loginSection">
+        <div class="login-card">
+            <h2>ACCÈS ADMIN</h2>
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group" style="text-align: left;">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group" style="text-align: left;">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="submit-btn" style="width: 100%;">SE CONNECTER</button>
+                <div id="loginError" class="login-error">Accès refusé. Identifiants incorrects.</div>
+            </form>
+        </div>
     </div>
 
-    <div class="main-content">
-        <!-- ORDERS SECTION -->
-        <div id="orders" class="section active">
-            <h1>GESTION COMMANDES</h1>
-            <table>
-                <thead>
-                    <tr>
-                        <th>CLIENT</th>
-                        <th>ARTICLES</th>
-                        <th>TOTAL</th>
-                        <th>STATUT</th>
-                        <th>ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody id="ordersBody">
-                    <tr>
-                        <td colspan="5" style="text-align:center; padding:50px; color:#222;">Chargement...</td>
-                    </tr>
-                </tbody>
-            </table>
+    <div id="adminContent" style="display: none; flex: 1; display: flex;">
+        <div class="sidebar">
+            <h2 style="font-family:'Outfit'; margin-bottom: 30px; letter-spacing:-1px;">L7K SYSTEM</h2>
+            <button class="nav-btn active" onclick="showSection('orders')">
+                <i data-lucide="shopping-cart"></i> Commandes
+            </button>
+            <button class="nav-btn" onclick="showSection('inventory')">
+                <i data-lucide="package"></i> Inventaire
+            </button>
+            <button class="nav-btn" onclick="showSection('add-product')">
+                <i data-lucide="plus-circle"></i> Ajouter Produit
+            </button>
         </div>
 
-        <!-- INVENTORY SECTION -->
-        <div id="inventory" class="section">
-            <h1>INVENTAIRE PRODUITS</h1>
-            <div class="admin-grid" id="inventoryGrid">
-                <!-- Products list -->
+        <div class="main-content">
+            <!-- ORDERS SECTION -->
+            <div id="orders" class="section active">
+                <h1>GESTION COMMANDES</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CLIENT</th>
+                            <th>ARTICLES</th>
+                            <th>TOTAL</th>
+                            <th>STATUT</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersBody">
+                        <tr>
+                            <td colspan="5" style="text-align:center; padding:50px; color:#222;">Chargement...</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
 
-        <!-- ADD PRODUCT SECTION -->
-        <div id="add-product" class="section">
-            <h1>NOUVEAU PRODUIT</h1>
-            <form id="productForm" class="admin-form" onsubmit="handleProductSubmit(event)">
-                <div class="form-group">
-                    <label class="form-label">Nom du Produit</label>
-                    <input type="text" id="p-name" required>
+            <!-- INVENTORY SECTION -->
+            <div id="inventory" class="section">
+                <h1>INVENTAIRE PRODUITS</h1>
+                <div class="admin-grid" id="inventoryGrid">
+                    <!-- Products list -->
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Prix (MAD)</label>
-                    <input type="number" id="p-price" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Description</label>
-                    <textarea id="p-desc" rows="4" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Photo du Produit (Drop or Click)</label>
-                    <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
-                        <i data-lucide="image-plus" id="dropIcon"></i>
-                        <span id="dropText">Glissez une image ici ou cliquez</span>
-                        <img id="previewImg" src="" alt="Preview">
+            </div>
+
+            <!-- ADD PRODUCT SECTION -->
+            <div id="add-product" class="section">
+                <h1>NOUVEAU PRODUIT</h1>
+                <form id="productForm" class="admin-form" onsubmit="handleProductSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Nom du Produit</label>
+                        <input type="text" id="p-name" required>
                     </div>
-                    <input type="file" id="fileInput" hidden accept="image/*">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">OU URL Image (Direct Link)</label>
-                    <input type="url" id="p-img" placeholder="https://...">
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Tailles (Séparées par virgules)</label>
-                    <input type="text" id="p-sizes" value="S, M, L, XL, XXL">
-                </div>
-                <button type="submit" class="submit-btn">PUBLIER LE DROP</button>
-            </form>
+                    <div class="form-group">
+                        <label class="form-label">Prix (MAD)</label>
+                        <input type="number" id="p-price" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea id="p-desc" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Photo du Produit (Drop or Click)</label>
+                        <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
+                            <i data-lucide="image-plus" id="dropIcon"></i>
+                            <span id="dropText">Glissez une image ici ou cliquez</span>
+                            <img id="previewImg" src="" alt="Preview">
+                        </div>
+                        <input type="file" id="fileInput" hidden accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">OU URL Image (Direct Link)</label>
+                        <input type="url" id="p-img" placeholder="https://...">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tailles (Séparées par virgules)</label>
+                        <input type="text" id="p-sizes" value="S, M, L, XL, XXL">
+                    </div>
+                    <button type="submit" class="submit-btn">PUBLIER LE DROP</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -388,6 +459,31 @@
         const SUPABASE_URL = 'https://exqmtppdpupkesbqrfic.supabase.co';
         const SUPABASE_ANON_KEY = 'sb_publishable_sJIZxFReSHq31in0eSATXw_4l8a0oZZ';
         const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const error = document.getElementById('loginError');
+
+            if (user === 'logindarori' && pass === 'connectvrai') {
+                sessionStorage.setItem('l7k_admin_logged', 'true');
+                initAdmin();
+            } else {
+                error.style.display = 'block';
+            }
+        }
+
+        function initAdmin() {
+            const isLogged = sessionStorage.getItem('l7k_admin_logged');
+            if (isLogged === 'true') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'flex';
+                fetchOrders();
+                fetchInventory();
+                setTimeout(() => lucide.createIcons(), 500);
+            }
+        }
 
         function showSection(id) {
             document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
@@ -431,10 +527,10 @@
                         <td><span class="badge ${o.status === 'pending' ? 'badge-pending' : 'badge-shipped'}">${o.status}</span></td>
                         <td>
                             <div style="display:flex; gap:5px;">
-                                <button class="icon-btn ${o.status === 'shipped' ? 'active' : ''}" onclick="updateOrderStatus(${o.id}, 'shipped')" title="Marquer comme expédié">
+                                <button class="icon-btn ${o.status === 'shipped' ? 'active' : ''}" onclick="updateOrderStatus('${o.id}', 'shipped')" title="Marquer comme expédié">
                                     <i data-lucide="check"></i>
                                 </button>
-                                <button class="icon-btn red" onclick="deleteOrder(${o.id})" title="Supprimer la commande">
+                                <button class="icon-btn red" onclick="deleteOrder('${o.id}')" title="Supprimer la commande">
                                     <i data-lucide="trash-2"></i>
                                 </button>
                             </div>
@@ -465,7 +561,7 @@
                         <h3>${p.name}</h3>
                         <p>Dh ${parseFloat(p.price || 0).toFixed(2)}</p>
                         <div class="action-flex">
-                            <button class="icon-btn red" onclick="deleteProduct(${p.id})"><i data-lucide="trash-2"></i></button>
+                            <button class="icon-btn red" onclick="deleteProduct('${p.id}')"><i data-lucide="trash-2"></i></button>
                         </div>
                     </div>
                 `).join('');
@@ -600,9 +696,7 @@
         }
 
         // Initial Load
-        fetchOrders();
-        fetchInventory();
-        setTimeout(() => lucide.createIcons(), 500);
+        initAdmin();
     </script>
 </body>
 
