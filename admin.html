@@ -358,17 +358,26 @@
                 flex-direction: column;
             }
 
+            #adminContent {
+                flex-direction: column !important;
+            }
+
             .sidebar {
                 width: 100%;
-                height: auto;
-                position: relative;
+                height: 60px;
+                position: fixed;
+                top: 0;
+                left: 0;
                 flex-direction: row;
-                padding: 15px;
+                padding: 0 15px;
                 border-right: none;
                 border-bottom: 1px solid var(--border);
                 overflow-x: auto;
-                gap: 5px;
+                gap: 10px;
                 background: #000;
+                z-index: 1000;
+                align-items: center;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.8);
             }
 
             .sidebar h2 {
@@ -376,14 +385,25 @@
             }
 
             .nav-btn {
-                padding: 10px 15px;
+                padding: 0 15px;
+                height: 40px;
                 white-space: nowrap;
-                font-size: 0.65rem;
+                font-size: 0.7rem;
+                color: #888;
+                border: 1px solid var(--border);
+                background: #080808;
+            }
+            
+            .nav-btn.active {
+                color: #fff;
+                border-color: #555;
             }
 
             .main-content {
                 margin-left: 0;
-                padding: 30px 20px;
+                padding: 90px 20px 40px;
+                width: 100%;
+                box-sizing: border-box;
             }
 
             h1 {
