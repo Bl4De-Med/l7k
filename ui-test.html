@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thumbnail Test</title>
+    <style>
+        body { background: #000; color: #fff; padding: 50px; }
+        .pd-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+    </style>
+</head>
+<body>
+    <div class="pd-grid-container">
+        <!-- Gallery -->
+        <div>
+            <div id="pd-main-img" style="aspect-ratio: 4/5; background: #fff; overflow: hidden; border: 1px solid #eee;">
+                <img id="main-product-image" src="https://via.placeholder.com/600x800?text=Main" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div id="pd-thumbs" style="margin-top: 20px; display: flex; flex-wrap: wrap; gap: 10px;">
+                <img src="https://via.placeholder.com/600x800?text=1" style="width: 80px; height: 100px; object-fit: cover; cursor: pointer; border: 2px solid #fff; border-radius: 4px;">
+                <img src="https://via.placeholder.com/600x800?text=2" style="width: 80px; height: 100px; object-fit: cover; cursor: pointer; border: 2px solid transparent; border-radius: 4px;">
+                <img src="https://via.placeholder.com/600x800?text=3" style="width: 80px; height: 100px; object-fit: cover; cursor: pointer; border: 2px solid transparent; border-radius: 4px;">
+            </div>
+        </div>
+        <div>
+            <h2>Test Product</h2>
+        </div>
+    </div>
+</body>
+</html>

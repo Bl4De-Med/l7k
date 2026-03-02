@@ -259,15 +259,10 @@
             background: #0a0a0a;
         }
 
-        .drop-zone img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            display: none;
-            z-index: 1;
+        #previewContainer img {
+            position: relative;
+            display: block;
+            z-index: 2;
         }
 
         .drop-zone span {
@@ -531,23 +526,30 @@
                         <textarea id="p-desc" rows="4" required></textarea>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Photo du Produit (Drop or Click)</label>
+                        <label class="form-label">Photos du Produit (Drop or Click)</label>
                         <div class="drop-zone" id="dropZone" onclick="document.getElementById('fileInput').click()">
                             <i data-lucide="image-plus" id="dropIcon"></i>
-                            <span id="dropText">Glissez une image ici ou cliquez</span>
-                            <img id="previewImg" src="" alt="Preview">
+                            <span id="dropText">Glissez des images ici ou cliquez</span>
+                            <div id="previewContainer" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px; width: 100%;"></div>
                         </div>
-                        <input type="file" id="fileInput" hidden accept="image/*">
+                        <input type="file" id="fileInput" hidden accept="image/*" multiple>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">OU URL Image (Direct Link)</label>
-                        <input type="url" id="p-img" placeholder="https://...">
+                        <label class="form-label">OU URLs Images (Séparées par virgules)</label>
+                        <input type="text" id="p-img" placeholder="https://img1.jpg, https://img2.jpg">
                     </div>
                     <div class="form-group">
                         <label class="form-label">Tailles (Séparées par virgules)</label>
                         <input type="text" id="p-sizes" value="S, M, L, XL, XXL">
                     </div>
-                    <button type="submit" class="submit-btn">PUBLIER LE DROP</button>
+                    <div class="form-group">
+                        <label class="form-label">Catégorie</label>
+                        <select id="p-category" required>
+                            <option value="Tees">T-Shirts</option>
+                            <option value="Hoodies">Hoodies</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-btn" style="width: 100%;">PUBLIER LE DROP</button>
                 </form>
             </div>
         </div>
@@ -680,13 +682,23 @@
                 const fileInput = document.getElementById('fileInput');
                 const urlInput = document.getElementById('p-img');
 
-                let imageUrl = urlInput.value;
-                if (fileInput.files && fileInput.files[0]) {
-                    imageUrl = await toBase64(fileInput.files[0]);
+                let finalImages = [];
+
+                // Handle URLs
+                if (urlInput.value.trim() !== '') {
+                    finalImages = urlInput.value.split(',').map(url => url.trim()).filter(url => url !== '');
                 }
 
-                if (!imageUrl) {
-                    alert('Veuillez ajouter une photo ou un lien URL.');
+                // Handle Files
+                if (fileInput.files && fileInput.files.length > 0) {
+                    for (let i = 0; i < fileInput.files.length; i++) {
+                        const base64Img = await toBase64(fileInput.files[i]);
+                        finalImages.push(base64Img);
+                    }
+                }
+
+                if (finalImages.length === 0) {
+                    alert('Veuillez ajouter au moins une photo ou un lien URL.');
                     return;
                 }
 
@@ -697,8 +709,9 @@
                     name: document.getElementById('p-name').value,
                     price: parseFloat(document.getElementById('p-price').value),
                     description: document.getElementById('p-desc').value,
-                    images: [imageUrl],
-                    sizes: document.getElementById('p-sizes').value.split(',').map(s => s.trim())
+                    images: finalImages,
+                    sizes: document.getElementById('p-sizes').value.split(',').map(s => s.trim()),
+                    category: document.getElementById('p-category').value
                 };
 
                 const { error } = await supabase.from('products').insert([product]);
@@ -724,7 +737,7 @@
         // Drop Zone Logic
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
-        const previewImg = document.getElementById('previewImg');
+        const previewContainer = document.getElementById('previewContainer');
         const dropText = document.getElementById('dropText');
         const dropIcon = document.getElementById('dropIcon');
 
@@ -737,23 +750,37 @@
 
         dropZone.addEventListener('drop', e => {
             fileInput.files = e.dataTransfer.files;
-            handlePreview(fileInput.files[0]);
+            handlePreview(fileInput.files);
         });
 
         fileInput.addEventListener('change', () => {
-            handlePreview(fileInput.files[0]);
+            handlePreview(fileInput.files);
         });
 
-        function handlePreview(file) {
-            if (file && file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = e => {
-                    previewImg.src = e.target.result;
-                    previewImg.style.display = 'block';
-                    dropText.style.display = 'none';
-                    dropIcon.style.display = 'none';
-                };
-                reader.readAsDataURL(file);
+        function handlePreview(files) {
+            previewContainer.innerHTML = ''; // Clear existing
+            if (files && files.length > 0) {
+                dropText.style.display = 'none';
+                dropIcon.style.display = 'none';
+                
+                Array.from(files).forEach(file => {
+                    if (file.type.startsWith('image/')) {
+                        const reader = new FileReader();
+                        reader.onload = e => {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.style.width = '80px';
+                            img.style.height = '80px';
+                            img.style.objectFit = 'cover';
+                            img.style.borderRadius = '4px';
+                            previewContainer.appendChild(img);
+                        };
+                        reader.readAsDataURL(file);
+                    }
+                });
+            } else {
+                dropText.style.display = 'block';
+                dropIcon.style.display = 'block';
             }
         }
 

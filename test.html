@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="out"></div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.40.0/dist/umd/supabase.js"></script>
+    <script>
+        const SUPABASE_URL = "https://exqmtppdpupkesbqrfic.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_sJIZxFReSHq31in0eSATXw_4l8a0oZZ";
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        async function run() {
+            const { data, error } = await supabase.from('products').select('*').order('created_at', { ascending: false }).limit(2);
+            document.getElementById('out').innerText = JSON.stringify(data, null, 2);
+        }
+        run();
+    </script>
+</body>
+</html>

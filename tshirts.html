@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Item | L7K OFFICEL</title>
+    <title>L7K OFFICEL</title>
     <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body style="padding-top: 100px;" id="product-detail-page">
+<body style="padding-top: 100px;">
 
     <nav class="nav-standard">
         <div class="nav-inner">
@@ -44,41 +44,45 @@
         </div>
     </nav>
 
-    <section style="padding: 60px 0;">
+    <!-- T-SHIRTS -->
+    <section style="padding: 60px 0 30px 0;">
         <div class="container">
-            <div class="pd-grid-container">
-                <!-- Gallery -->
-                <div>
-                    <div id="pd-main-img"
-                        style="aspect-ratio: 4/5; background: #fff; overflow: hidden; border: 1px solid #eee; margin-bottom: 20px;">
-                        <!-- Img via JS -->
-                    </div>
-                    <div id="pd-thumbs" style="display: flex; gap: 10px;">
-                        <!-- Thumbs via JS -->
-                    </div>
-                </div>
-
-                <!-- Info -->
-                <div style="padding-top: 20px;">
-                    <h1 id="pd-name" style="margin-bottom: 10px;">Item Details</h1>
-                    <div id="pd-price"
-                        style="font-family: 'Outfit'; color: #000; margin-bottom: 30px;">0.00 MAD</div>
-
-                    <p id="pd-desc" style="color: #666; margin-bottom: 30px; line-height: 1.6;">
-                        Authentic premium streetwear construction. Built for comfort and durability.
-                    </p>
-
-                    <h4 style="font-size: 0.7rem; margin-bottom: 12px; opacity: 0.4;">Sizes Available</h4>
-                    <div id="pd-sizes" style="display: flex; gap: 8px; margin-bottom: 40px;">
-                        <!-- Sizes via JS -->
-                    </div>
-
-                    <button class="btn-main" style="width: 100%; text-align: center; border: none; outline: none;"
-                        onclick="window.addToCartFromPD()">AJOUTER AU PANIER</button>
+            <h1 style="font-size: 1.8rem; margin-bottom: 40px;">TSHIRT COLLECTION</h1>
+            <div class="product-grid" id="tshirts-grid-shop">
+                <div style="grid-column: 1/-1; text-align: center; padding: 100px">
+                    <p style="color: #444; font-weight: 900">SYNCING TEES...</p>
                 </div>
             </div>
         </div>
     </section>
+
+
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-logo-group">
+                <img src="assets/logo.PNG" alt="L7K LOGO" style="height: 50px;">
+                <a href="https://www.instagram.com/l7k_officiel?igsh=MXZ0MmlxZWIzeThpYQ==" target="_blank"
+                    class="social-icon">
+                    <i data-lucide="instagram"></i>
+                </a>
+                <a href="https://www.tiktok.com/@l7k_officiel?_r=1&_t=ZS-942Um8hP9fR" target="_blank"
+                    class="social-icon">
+                    <svg width="28" height="28" viewBox="-4 -4 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-1.26-.88-2.26-2.13-2.73-3.61-.03 2.14-.02 4.28-.02 6.43-.02 2.38-.13 4.79-.8 7.07-.63 2.27-2.02 4.41-4.04 5.61-2.02 1.2-4.52 1.52-6.75 1.05-2.24-.46-4.32-1.92-5.46-3.88-1.15-1.95-1.44-4.29-1.02-6.51.44-2.26 1.86-4.33 3.84-5.46 1.99-1.14 4.49-1.39 6.64-.78v4.4c-1.18-.39-2.52-.3-3.62.26-.64.33-1.17.85-1.5 1.5-.32.65-.4 1.41-.23 2.12.18.7.6 1.33 1.16 1.76.57.43 1.26.65 1.98.63.74-.01 1.47-.26 2.04-.73.57-.47.96-1.12 1.09-1.85.12-.66.07-1.35.07-2.01V0h-.07z" fill="#25F4EE" style="mix-blend-mode: screen; transform: translate(-0.5px, 0.5px);"/>
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-1.26-.88-2.26-2.13-2.73-3.61-.03 2.14-.02 4.28-.02 6.43-.02 2.38-.13 4.79-.8 7.07-.63 2.27-2.02 4.41-4.04 5.61-2.02 1.2-4.52 1.52-6.75 1.05-2.24-.46-4.32-1.92-5.46-3.88-1.15-1.95-1.44-4.29-1.02-6.51.44-2.26 1.86-4.33 3.84-5.46 1.99-1.14 4.49-1.39 6.64-.78v4.4c-1.18-.39-2.52-.3-3.62.26-.64.33-1.17.85-1.5 1.5-.32.65-.4 1.41-.23 2.12.18.7.6 1.33 1.16 1.76.57.43 1.26.65 1.98.63.74-.01 1.47-.26 2.04-.73.57-.47.96-1.12 1.09-1.85.12-.66.07-1.35.07-2.01V0h-.07z" fill="#FE2C55" style="mix-blend-mode: screen; transform: translate(0.5px, -0.5px);"/>
+                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-1.26-.88-2.26-2.13-2.73-3.61-.03 2.14-.02 4.28-.02 6.43-.02 2.38-.13 4.79-.8 7.07-.63 2.27-2.02 4.41-4.04 5.61-2.02 1.2-4.52 1.52-6.75 1.05-2.24-.46-4.32-1.92-5.46-3.88-1.15-1.95-1.44-4.29-1.02-6.51.44-2.26 1.86-4.33 3.84-5.46 1.99-1.14 4.49-1.39 6.64-.78v4.4c-1.18-.39-2.52-.3-3.62.26-.64.33-1.17.85-1.5 1.5-.32.65-.4 1.41-.23 2.12.18.7.6 1.33 1.16 1.76.57.43 1.26.65 1.98.63.74-.01 1.47-.26 2.04-.73.57-.47.96-1.12 1.09-1.85.12-.66.07-1.35.07-2.01V0h-.07z" fill="white" style="mix-blend-mode: screen;"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="footer-copy">© 2026 L7K OFFICEL. NO COMPROMISE.</div>
+        </div>
+    </footer>
+
+    <!-- Whatsapp Float -->
+    <a href="https://wa.me/212770850504" class="whatsapp-btn" target="_blank">
+        <i data-lucide="message-circle" style="width:28px; height:28px;"></i>
+    </a>
 
     <!-- SHOPPING BAG TRIGGER (Top Nav) -->
     <script>
@@ -144,6 +148,12 @@
                         <input type="text" id="orderAddress" placeholder="Adresse | العنوان">
                     </div>
                 </div>
+
+                <div style="margin: 20px 0; display: flex; gap: 10px; align-items: center; font-size: 0.8rem;">
+                    <input type="checkbox" id="orderNewsletter" checked>
+                    <label for="orderNewsletter">Abonnez-vous pour rester informé des nouveaux produits et
+                        offres!</label>
+                </div>
             </div>
 
             <div class="buy-wrapper">
@@ -153,32 +163,6 @@
             </div>
         </div>
     </div>
-
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-logo-group">
-                <img src="assets/logo.PNG" alt="L7K LOGO" style="height: 50px;">
-                <a href="https://www.instagram.com/l7k_officiel?igsh=MXZ0MmlxZWIzeThpYQ==" target="_blank"
-                    class="social-icon">
-                    <i data-lucide="instagram"></i>
-                </a>
-                <a href="https://www.tiktok.com/@l7k_officiel?_r=1&_t=ZS-942Um8hP9fR" target="_blank"
-                    class="social-icon">
-                    <svg width="28" height="28" viewBox="-4 -4 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-1.26-.88-2.26-2.13-2.73-3.61-.03 2.14-.02 4.28-.02 6.43-.02 2.38-.13 4.79-.8 7.07-.63 2.27-2.02 4.41-4.04 5.61-2.02 1.2-4.52 1.52-6.75 1.05-2.24-.46-4.32-1.92-5.46-3.88-1.15-1.95-1.44-4.29-1.02-6.51.44-2.26 1.86-4.33 3.84-5.46 1.99-1.14 4.49-1.39 6.64-.78v4.4c-1.18-.39-2.52-.3-3.62.26-.64.33-1.17.85-1.5 1.5-.32.65-.4 1.41-.23 2.12.18.7.6 1.33 1.16 1.76.57.43 1.26.65 1.98.63.74-.01 1.47-.26 2.04-.73.57-.47.96-1.12 1.09-1.85.12-.66.07-1.35.07-2.01V0h-.07z" fill="#25F4EE" style="mix-blend-mode: screen; transform: translate(-0.5px, 0.5px);"/>
-                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-1.26-.88-2.26-2.13-2.73-3.61-.03 2.14-.02 4.28-.02 6.43-.02 2.38-.13 4.79-.8 7.07-.63 2.27-2.02 4.41-4.04 5.61-2.02 1.2-4.52 1.52-6.75 1.05-2.24-.46-4.32-1.92-5.46-3.88-1.15-1.15-1.44-4.29-1.02-6.51.44-2.26 1.86-4.33 3.84-5.46 1.99-1.14 4.49-1.39 6.64-.78v4.4c-1.18-.39-2.52-.3-3.62.26-.64.33-1.17.85-1.5 1.5-.32.65-.4 1.41-.23 2.12.18.7.6 1.33 1.16 1.76.57.43 1.26.65 1.98.63.74-.01 1.47-.26 2.04-.73.57-.47.96-1.12 1.09-1.85.12-.66.07-1.35.07-2.01V0h-.07z" fill="#FE2C55" style="mix-blend-mode: screen; transform: translate(0.5px, -0.5px);"/>
-                        <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-1.26-.88-2.26-2.13-2.73-3.61-.03 2.14-.02 4.28-.02 6.43-.02 2.38-.13 4.79-.8 7.07-.63 2.27-2.02 4.41-4.04 5.61-2.02 1.2-4.52 1.52-6.75 1.05-2.24-.46-4.32-1.92-5.46-3.88-1.15-1.15-1.44-4.29-1.02-6.51.44-2.26 1.86-4.33 3.84-5.46 1.99-1.14 4.49-1.39 6.64-.78v4.4c-1.18-.39-2.52-.3-3.62.26-.64.33-1.17.85-1.5 1.5-.32.65-.4 1.41-.23 2.12.18.7.6 1.33 1.16 1.76.57.43 1.26.65 1.98.63.74-.01 1.47-.26 2.04-.73.57-.47.96-1.12 1.09-1.85.12-.66.07-1.35.07-2.01V0h-.07z" fill="white" style="mix-blend-mode: screen;"/>
-                    </svg>
-                </a>
-            </div>
-            <div class="footer-copy">© 2026 L7K OFFICEL. NO COMPROMISE.</div>
-        </div>
-    </footer>
-
-    <!-- Whatsapp Float -->
-    <a href="https://wa.me/212770850504" class="whatsapp-btn" target="_blank">
-        <i data-lucide="message-circle" style="width:28px; height:28px;"></i>
-    </a>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.40.0/dist/umd/supabase.js"></script>
     <script src="js/main.js"></script>
